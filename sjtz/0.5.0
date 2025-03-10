@@ -1,0 +1,5 @@
+Looking in indexes: https://mirrors.bfsu.edu.cn/pypi/web/simple
+Collecting cloudpickle
+  Downloading https://mirrors.bfsu.edu.cn/pypi/web/packages/7e/e8/64c37fadfc2816a7701fa8a6ed8d87327c7d54eacfbfb6edab14a2f2be75/cloudpickle-3.1.1-py3-none-any.whl (20 kB)
+Installing collected packages: cloudpickle
+Successfully installed cloudpickle-3.1.1

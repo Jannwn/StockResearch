@@ -1,0 +1,5 @@
+Looking in indexes: https://mirrors.bfsu.edu.cn/pypi/web/simple
+Collecting platformdirs
+  Downloading https://mirrors.bfsu.edu.cn/pypi/web/packages/3c/a6/bc1012356d8ece4d66dd75c4b9fc6c1f6650ddd5991e421177d9f8f671be/platformdirs-4.3.6-py3-none-any.whl (18 kB)
+Installing collected packages: platformdirs
+Successfully installed platformdirs-4.3.6

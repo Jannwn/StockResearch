@@ -1,9 +1,5 @@
 {
   "RETRIEVER": "tavily" ,
-  "EMBEDDING": "openai:text-embedding-3-small", 
-  "FAST_LLM":"openai:gpt-4o-mini",
-  "SMART_LLM": "openai:gpt-4o",
-  "STRATEGIC_LLM": "openai:o1-preview",
   "LANGUAGE": "中文",
   "CURATE_SOURCES":"True",
   "FAST_TOKEN_LIMIT": 2000,

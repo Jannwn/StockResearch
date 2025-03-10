@@ -1,0 +1,6 @@
+Looking in indexes: https://mirrors.bfsu.edu.cn/pypi/web/simple
+Collecting pygments
+  Downloading https://mirrors.bfsu.edu.cn/pypi/web/packages/8a/0b/9fcc47d19c48b59121088dd6da2488a49d5f72dacf8262e2790a1d2c7d15/pygments-2.19.1-py3-none-any.whl (1.2 MB)
+     ---------------------------------------- 1.2/1.2 MB 6.8 MB/s eta 0:00:00
+Installing collected packages: pygments
+Successfully installed pygments-2.19.1
