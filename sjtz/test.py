@@ -10,7 +10,7 @@ from datetime import datetime
 from call_model import call_model
 from indicators_to_prompt import indicators_to_prompt
 dir = os.path.dirname(__file__)
-load_dotenv(r"C:\Users\zyx\Desktop\sjtz\.env")
+load_dotenv(r"C:\Users\zyx\Desktop\s\QuantAgent\sjtz\.env")
 today = datetime.now().strftime('%Y/%m/%d')
 #print(os.getenv("NOMIC_API_KEY"))
 async def get_research_report(query: str, report_type: str, report_source: str,config_path:str) -> str:
@@ -19,11 +19,11 @@ async def get_research_report(query: str, report_type: str, report_source: str,c
     report = await researcher.write_report()
     return report
 async def industry(prompt: str) -> str:
-    result = await get_research_report(query=f"今天是{today},你是一位专业的行业研究员与宏观分析师,你的目标是撰写一篇优秀，简短，高质量的金融分析报告。行业研究需“由外到内”（宏观→行业→企业）、“由静到动”（现状→趋势），结合定量数据（市场规模、财务指标）与定性洞察（政策、技术变革），综合运用不同的分析方法（趋势分析、归因分析、价值分析等），并结合行业动态（政策、技术、行业事件等），对行业未来发展趋势进行分析，不需要进行个股分析，不少于1500字。请你结合最近一年数据只进行行业分析与宏观背景分析,主题是："+prompt, report_type="research_report", report_source="Hybrid",config_path=os.path.join(dir, "industry.json"))
+    result = await get_research_report(query=f"今天是{today},你是一位专业的行业研究员与宏观分析师,你的目标是撰写一篇优秀，简短，高质量的金融分析报告。行业研究需“由外到内”（宏观→行业→企业）、“由静到动”（现状→趋势），结合定量数据（市场规模、财务指标）与定性洞察（政策、技术变革），综合运用不同的分析方法（趋势分析、归因分析、价值分析等），并结合行业动态（政策、技术、行业事件等），对行业未来发展趋势进行分析，不需要进行个股分析，不少于1500字。请你结合最近一年数据只进行行业分析与宏观背景分析,主题是："+prompt, report_type="research_report", report_source="hybrid",config_path=os.path.join(dir, "industry.json"))
     return result
 
 async def sentiment(prompt: str) -> str:
-    result = await get_research_report(query=f"今天是{today}，你是一位专业的金融市场情绪分析专家。你的任务是从网络上和本地数据库中捕捉能反映当前A股市场情绪的消息和新闻或者指数，分析金融市场给定行业的投资者情绪，并提供详细的分析结果，不少于1000字。你的回答应该包括以下内容：1. 对A股市场整体投资者情绪进行分析。2. 对该行业的投资者情绪进行分析；3. 对造成该行业投资者情绪变化的主要原因进行分析；4. 对该行业投资情绪对A股市场的的主要影响进行分析；请你结合最近一周数据只进行投资者情绪分析,主题是："+prompt,report_type="custom_report", report_source="Hybrid",config_path=os.path.join(dir, "sentiment.json"))
+    result = await get_research_report(query=f"今天是{today}，你是一位专业的金融市场情绪分析专家。你的任务是从网络上和本地数据库中捕捉能反映当前A股市场情绪的消息和新闻或者指数，分析金融市场给定行业的投资者情绪，并提供详细的分析结果，不少于1000字。你的回答应该包括以下内容：1. 对A股市场整体投资者情绪进行分析。2. 对该行业的投资者情绪进行分析；3. 对造成该行业投资者情绪变化的主要原因进行分析；4. 对该行业投资情绪对A股市场的的主要影响进行分析；请你结合最近一周数据只进行投资者情绪分析,主题是："+prompt,report_type="custom_report", report_source="hybrid",config_path=os.path.join(dir, "sentiment.json"))
     return result
 
 async def technique(tec: str) -> str:
@@ -92,7 +92,7 @@ def outputs(prompt,codes,path):
     summary = call_model(content = prompt4)
 
     result = draft.replace("section1:行业研究及宏观背景分析",section1).replace("section2:市场情绪分析",section2).replace("section3:技术面分析",section3).replace("summary:结论与投资建议",summary)
-    with open(os.path.join(path,"writer_report.md"), "w", encoding="utf-8") as file:
+    with open(os.path.join(path,"try\\writer_report.md"), "w", encoding="utf-8") as file:
             file.write(result)
 
     prom = f"""你是一位专业的金融分析报告编辑,你的目标是根据markdown语法对报告在初稿基础上进行细微修改。
@@ -103,16 +103,18 @@ def outputs(prompt,codes,path):
     """
     revise_report = call_model(content= prom)
 
-    with open(os.path.join(path,"revise_report.md"), "w", encoding="utf-8") as file:
+    with open(os.path.join(path,"try\\revise_report.md"), "w", encoding="utf-8") as file:
         file.write(revise_report)
     return revise_report
 
 
 if __name__ == "__main__":
     t1 = time.time()
+    print(os.getenv("NOMIC_API_KEY"))
+    print(os.getenv("TAVILY_API_KEY"))
     prompt = "请帮我分析一下A股市场有色金属 铜相关板块各股并给出投资建议"
     codes = indicators_to_prompt(["601899","603993","600362","601168","000630","603979","000878","601212","002203","000737","002171","601609","600490"])
-    outputs(prompt = prompt,codes = codes,path = "try")
+    outputs(prompt = prompt,codes = codes,path = dir)
     t2 = time.time()
     print(t2-t1)
 
